@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
 import "./App.css";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   LoginPage,
@@ -21,7 +21,7 @@ import {
   OrderDetailsPage,
   TrackOrderPage,
   UserInbox,
-} from "./routes/Routes.js";
+} from "./routes/Routes.jsx";
 import {
   ShopDashboardPage,
   ShopCreateProduct,
@@ -44,7 +44,7 @@ import {
   AdminDashboardOrders,
   AdminDashboardProducts,
   AdminDashboardEvents,
-  AdminDashboardWithdraw
+  AdminDashboardWithdraw,
 } from "./routes/AdminRoutes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -52,7 +52,7 @@ import Store from "./redux/store";
 import { loadSeller, loadUser } from "./redux/actions/user";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import ProtectedAdminRoute from "./routes/ProtectedAdminRoute";
-import { ShopHomePage } from "./ShopRoutes.js";
+import { ShopHomePage } from "./ShopRoutes.jsx";
 import SellerProtectedRoute from "./routes/SellerProtectedRoute";
 import { getAllProducts } from "./redux/actions/product";
 import { getAllEvents } from "./redux/actions/event";
@@ -292,7 +292,7 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         />
-         <Route
+        <Route
           path="/admin-products"
           element={
             <ProtectedAdminRoute>
@@ -300,7 +300,7 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         />
-         <Route
+        <Route
           path="/admin-events"
           element={
             <ProtectedAdminRoute>
@@ -308,7 +308,7 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         />
-         <Route
+        <Route
           path="/admin-withdraw-request"
           element={
             <ProtectedAdminRoute>
