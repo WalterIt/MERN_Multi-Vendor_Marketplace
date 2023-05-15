@@ -99,7 +99,7 @@ const AllProducts = () => {
         name: item.name,
         price: "US$ " + item.discountPrice,
         Stock: item.stock,
-        sold: item?.sold_out,
+        sold: item?.soldOut,
       });
     });
 

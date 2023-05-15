@@ -45,7 +45,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
       if (data.stock < count) {
         toast.error("Product stock limited!");
       } else {
-        const cartData = { ...data, qty: count };
+        const cartData = { ...data, quantity: count };
         dispatch(addTocart(cartData));
         toast.success("Item added to cart successfully!");
       }
@@ -83,14 +83,11 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%]">
-                <img
-                  src={`${backend_url}${data.images && data.images[0]}`}
-                  alt=""
-                />
+                <img src={`${data.images && data.images[0]}`} alt="" />
                 <div className="flex">
                   <Link to={`/shop/preview/${data.shop._id}`} className="flex">
                     <img
-                      src={`${backend_url}${data?.shop?.avatar}`}
+                      src={`${data?.shop?.avatar}`}
                       alt=""
                       className="w-[50px] h-[50px] rounded-full mr-2"
                     />

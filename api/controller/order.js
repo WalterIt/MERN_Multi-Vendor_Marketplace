@@ -102,7 +102,7 @@ router.put(
       }
       if (req.body.status === "Transferred to delivery partner") {
         order.cart.forEach(async (o) => {
-          await updateOrder(o._id, o.qty);
+          await updateOrder(o._id, o.quantity);
         });
       }
 
@@ -111,7 +111,7 @@ router.put(
       if (req.body.status === "Delivered") {
         order.deliveredAt = Date.now();
         order.paymentInfo.status = "Succeeded";
-        const serviceCharge = order.totalPrice * .10;
+        const serviceCharge = order.totalPrice * 0.1;
         await updateSellerInfo(order.totalPrice - serviceCharge);
       }
 
@@ -122,18 +122,18 @@ router.put(
         order,
       });
 
-      async function updateOrder(id, qty) {
+      async function updateOrder(id, quantity) {
         const product = await Product.findById(id);
 
-        product.stock -= qty;
-        product.sold_out += qty;
+        product.stock -= quantity;
+        product.soldOut += quantity;
 
         await product.save({ validateBeforeSave: false });
       }
 
       async function updateSellerInfo(amount) {
         const seller = await Shop.findById(req.seller.id);
-        
+
         seller.availableBalance = amount;
 
         await seller.save();
@@ -193,15 +193,15 @@ router.put(
 
       if (req.body.status === "Refund Success") {
         order.cart.forEach(async (o) => {
-          await updateOrder(o._id, o.qty);
+          await updateOrder(o._id, o.quantity);
         });
       }
 
-      async function updateOrder(id, qty) {
+      async function updateOrder(id, quantity) {
         const product = await Product.findById(id);
 
-        product.stock += qty;
-        product.sold_out -= qty;
+        product.stock += quantity;
+        product.soldOut -= quantity;
 
         await product.save({ validateBeforeSave: false });
       }

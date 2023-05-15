@@ -18,7 +18,7 @@ const Cart = ({ setOpenCart }) => {
   };
 
   const totalPrice = cart.reduce(
-    (acc, item) => acc + item.qty * item.discountPrice,
+    (acc, item) => acc + item.quantity * item.discountPrice,
     0
   );
 
@@ -32,11 +32,11 @@ const Cart = ({ setOpenCart }) => {
         {cart && cart.length === 0 ? (
           <div className="w-full h-screen flex items-center justify-center">
             <div className="flex w-full justify-end pt-5 pr-5 fixed top-3 right-3">
-               <RxCross1 
+              <RxCross1
                 size={25}
                 className="cursor-pointer"
                 onClick={() => setOpenCart(false)}
-                />
+              />
             </div>
             <h5>Cart Items is empty!</h5>
           </div>
@@ -53,7 +53,9 @@ const Cart = ({ setOpenCart }) => {
               {/* Item length */}
               <div className={`${styles.noramlFlex} p-4`}>
                 <IoBagHandleOutline size={25} />
-                <h5 className="pl-2 text-[20px] font-[500]">{cart && cart.length} items</h5>
+                <h5 className="pl-2 text-[20px] font-[500]">
+                  {cart && cart.length} items
+                </h5>
               </div>
 
               {/* cart Single Items */}
@@ -91,7 +93,7 @@ const Cart = ({ setOpenCart }) => {
 };
 
 const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
-  const [value, setValue] = useState(data.qty);
+  const [value, setValue] = useState(data.quantity);
   const totalPrice = data.discountPrice * value;
 
   const increment = (data) => {
@@ -99,14 +101,14 @@ const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
       toast.error("Product stock limited!");
     } else {
       setValue(value + 1);
-      const updateCartData = { ...data, qty: value + 1 };
+      const updateCartData = { ...data, quantity: value + 1 };
       quantityChangeHandler(updateCartData);
     }
   };
 
   const decrement = (data) => {
     setValue(value === 1 ? 1 : value - 1);
-    const updateCartData = { ...data, qty: value === 1 ? 1 : value - 1 };
+    const updateCartData = { ...data, quantity: value === 1 ? 1 : value - 1 };
     quantityChangeHandler(updateCartData);
   };
 
@@ -120,7 +122,7 @@ const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
           >
             <HiPlus size={18} color="#fff" />
           </div>
-          <span className="pl-[10px]">{data.qty}</span>
+          <span className="pl-[10px]">{data.quantity}</span>
           <div
             className="bg-[#a7abb14f] rounded-full w-[25px] h-[25px] flex items-center justify-center cursor-pointer"
             onClick={() => decrement(data)}
@@ -129,7 +131,7 @@ const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
           </div>
         </div>
         <img
-          src={`${backend_url}${data?.images[0]}`}
+          src={`${data?.images[0]}`}
           alt=""
           className="w-[130px] h-min ml-2 mr-2 rounded-[5px]"
         />

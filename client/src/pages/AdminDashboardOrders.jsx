@@ -46,12 +46,12 @@ const AdminDashboardOrders = () => {
       flex: 0.8,
     },
     {
-        field: "createdAt",
-        headerName: "Order Date",
-        type: "number",
-        minWidth: 130,
-        flex: 0.8,
-      },
+      field: "createdAt",
+      headerName: "Order Date",
+      type: "number",
+      minWidth: 130,
+      flex: 0.8,
+    },
   ];
 
   const row = [];
@@ -59,10 +59,10 @@ const AdminDashboardOrders = () => {
     adminOrders.forEach((item) => {
       row.push({
         id: item._id,
-        itemsQty: item?.cart?.reduce((acc, item) => acc + item.qty, 0),
+        itemsQty: item?.cart?.reduce((acc, item) => acc + item.quantity, 0),
         total: item?.totalPrice + " $",
         status: item?.status,
-        createdAt: item?.createdAt.slice(0,10),
+        createdAt: item?.createdAt.slice(0, 10),
       });
     });
   return (
