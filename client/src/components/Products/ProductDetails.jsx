@@ -127,6 +127,7 @@ const ProductDetails = ({ data }) => {
                   {data &&
                     data.images.map((i, index) => (
                       <div
+                        key={index}
                         className={`${
                           select === 0 ? "border" : "null"
                         } cursor-pointer`}
