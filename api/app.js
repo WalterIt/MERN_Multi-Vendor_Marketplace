@@ -10,9 +10,9 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://vs-marketplace.onrender.com",
-      "https://vs-marketplace.vercel.app",
-      "https://walterit.github.io/MERN_Multi-Vendor_Marketplace_Vercel",
+      "https://walterit.github.io/MERN_Multi-Vendor_Marketplace_Vercel/",
+      // "https://vs-marketplace.onrender.com",
+      // "https://vs-marketplace.vercel.app",
     ],
     credentials: true,
   })
