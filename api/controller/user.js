@@ -40,7 +40,14 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
 
     const activationToken = createActivationToken(user);
 
-    const activationUrl = `https://vs-marketplace.vercel.app/activation/${activationToken}`;
+    const baseUrl =
+      process.env.NODE_ENV === "production"
+        ? "https://vs-marketplace.vercel.app"
+        : "http://localhost:3000";
+
+    const activationUrl = `${baseUrl}/activation/${activationToken}`;
+
+    // const activationUrl = `https://vs-marketplace.vercel.app/activation/${activationToken}`;
     // const activationUrl = `http://localhost:3000/activation/${activationToken}`;
 
     try {
