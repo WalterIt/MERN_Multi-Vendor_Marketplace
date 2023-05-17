@@ -40,7 +40,7 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
 
     const activationToken = createActivationToken(user);
 
-    const activationUrl = `http://localhost:3000/${activationToken}`;
+    const activationUrl = `https://vs-marketplace.onrender.com/${activationToken}`;
 
     try {
       await sendMail({
