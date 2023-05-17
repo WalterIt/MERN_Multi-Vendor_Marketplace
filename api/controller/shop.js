@@ -44,7 +44,8 @@ router.post("/create-shop", upload.single("file"), async (req, res, next) => {
 
     const activationToken = createActivationToken(seller);
 
-    const activationUrl = `https://walterit.github.io/MERN_Multi-Vendor_Marketplace_Vercel/seller/activation/${activationToken}`;
+    const activationUrl = `https://vs-marketplace.vercel.app/seller/activation/${activationToken}`;
+    // const activationUrl = `http://localhost:3000/seller/activation/${activationToken}`;
 
     try {
       await sendMail({
