@@ -7,10 +7,10 @@ const sendMail = async (options) => {
     service: process.env.SMPT_SERVICE,
 
     // Added this lines
-    credentials: "",
-    secure: false,
-    useSSL: false,
-    ca: "",
+    // credentials: "",
+    // secure: false,
+    // useSSL: false,
+    // ca: "",
     // END of Added this lines
 
     auth: {
@@ -26,10 +26,10 @@ const sendMail = async (options) => {
     text: options.message,
 
     // Added this lines
-    credentials: "",
-    secure: false,
-    useSSL: false,
-    ca: "",
+    // credentials: "",
+    // secure: false,
+    // useSSL: false,
+    // ca: "",
     // END of Added this lines
   };
 
