@@ -61,6 +61,18 @@ import { server } from "./server";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
+axios.defaults.withCredentials = true;
+
+//  TODO:
+// - Normalize Price Format in All Project
+// - Implement Firebase Upload Pictures in All Project: Create Products/Events, Profiles
+// - Animate & Stylize All Buttons
+// - Change the Scrollbar visibility in Profiles
+// - Add Headers in Shop Profile Details & Shop Preview
+// - Implement Animation transition in ProductCard
+// - Fix Sign Up Users & Sellers
+// - Continue implementing the Project from the Original
+
 const App = () => {
   const [stripeApikey, setStripeApiKey] = useState("");
 
@@ -68,6 +80,7 @@ const App = () => {
     const { data } = await axios.get(`${server}/payment/stripeapikey`);
     setStripeApiKey(data.stripeApikey);
   }
+
   useEffect(() => {
     Store.dispatch(loadUser());
     Store.dispatch(loadSeller());

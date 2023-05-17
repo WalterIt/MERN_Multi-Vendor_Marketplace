@@ -61,7 +61,7 @@ const ShopInfo = ({ isOwner }) => {
               <img
                 src={`${data.avatar}`}
                 alt=""
-                className="w-[150px] h-[150px] object-cover rounded-full"
+                className="w-[150px] h-[150px] object-fill rounded-full"
               />
             </div>
             <h3 className="text-center py-2 text-[20px]">{data.name}</h3>

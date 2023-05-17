@@ -108,7 +108,7 @@ const ShopProfileData = ({ isOwner }) => {
               <div className="w-full flex my-4">
                 <img
                   src={`${item.user.avatar}`}
-                  className="w-[50px] h-[50px] rounded-full"
+                  className="w-[50px] h-[50px] object-fill rounded-full"
                   alt=""
                 />
                 <div className="pl-2">

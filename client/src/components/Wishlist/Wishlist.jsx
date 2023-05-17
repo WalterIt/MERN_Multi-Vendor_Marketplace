@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
+import { BiTrash } from "react-icons/bi";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { BsCartPlus } from "react-icons/bs";
 import styles from "../../styles/styles";
@@ -26,7 +27,7 @@ const Wishlist = ({ setOpenWishlist }) => {
 
   return (
     <div className="fixed top-0 left-0 w-full bg-[#0000004b] h-screen z-10">
-      <div className="fixed top-0 right-0 h-full w-[80%] overflow-y-scroll 800px:w-[25%] bg-white flex flex-col justify-between shadow-sm">
+      <div className="fixed top-0 right-0 h-full w-[80%] overflow-y-scroll scrollbar-hide 800px:w-[30%] bg-white flex flex-col justify-between shadow-sm">
         {wishlist && wishlist.length === 0 ? (
           <div className="w-full h-screen flex items-center justify-center">
             <div className="flex w-full justify-end pt-5 pr-5 fixed top-3 right-3">
@@ -36,7 +37,9 @@ const Wishlist = ({ setOpenWishlist }) => {
                 onClick={() => setOpenWishlist(false)}
               />
             </div>
-            <h5>Wishlist Items is empty!</h5>
+            <h5 className="uppercase font-bold tracking-widest text-lg text-red-600 ">
+              Wishlist Items is empty!
+            </h5>
           </div>
         ) : (
           <>
@@ -84,10 +87,16 @@ const CartSingle = ({ data, removeFromWishlistHandler, addToCartHandler }) => {
   return (
     <div className="border-b p-4">
       <div className="w-full 800px:flex items-center">
-        <RxCross1
-          className="cursor-pointer 800px:mb-['unset'] 800px:ml-['unset'] mb-2 ml-2"
-          onClick={() => removeFromWishlistHandler(data)}
-        />
+        <div className="w-[30px] ">
+          <BsCartPlus
+            size={30}
+            color="#3321C8"
+            className="cursor-pointer"
+            tile="Add to cart"
+            onClick={() => addToCartHandler(data)}
+          />
+        </div>
+
         <img
           src={`${data?.images[0]}`}
           alt=""
@@ -97,15 +106,15 @@ const CartSingle = ({ data, removeFromWishlistHandler, addToCartHandler }) => {
         <div className="pl-[5px]">
           <h1>{data.name}</h1>
           <h4 className="font-[600] pt-3 800px:pt-[3px] text-[17px] text-[#d02222] font-Roboto">
-            US${totalPrice}
+            US$ {totalPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           </h4>
         </div>
         <div>
-          <BsCartPlus
-            size={20}
-            className="cursor-pointer"
-            tile="Add to cart"
-            onClick={() => addToCartHandler(data)}
+          <BiTrash
+            size={25}
+            color="red"
+            className="cursor-pointer 800px:mb-['unset'] 800px:ml-['unset'] mb-2 ml-2"
+            onClick={() => removeFromWishlistHandler(data)}
           />
         </div>
       </div>

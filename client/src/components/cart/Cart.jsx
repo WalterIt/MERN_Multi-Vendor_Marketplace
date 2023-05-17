@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { HiOutlineMinus, HiPlus } from "react-icons/hi";
+import { BiTrash } from "react-icons/bi";
 import styles from "../../styles/styles";
 import { Link } from "react-router-dom";
 import { backend_url } from "../../server";
@@ -28,7 +29,7 @@ const Cart = ({ setOpenCart }) => {
 
   return (
     <div className="fixed top-0 left-0 w-full bg-[#0000004b] h-screen z-10">
-      <div className="fixed top-0 right-0 h-full w-[80%] 800px:w-[25%] bg-white flex flex-col overflow-y-scroll justify-between shadow-sm">
+      <div className="fixed top-0 right-0 h-full w-[80%] 800px:w-[30%] bg-white flex flex-col overflow-y-scroll scrollbar-hide justify-between shadow-sm">
         {cart && cart.length === 0 ? (
           <div className="w-full h-screen flex items-center justify-center">
             <div className="flex w-full justify-end pt-5 pr-5 fixed top-3 right-3">
@@ -38,7 +39,9 @@ const Cart = ({ setOpenCart }) => {
                 onClick={() => setOpenCart(false)}
               />
             </div>
-            <h5>Cart Items is empty!</h5>
+            <h5 className="uppercase font-bold tracking-widest text-lg text-red-600 ">
+              Cart Items is empty!
+            </h5>
           </div>
         ) : (
           <>
@@ -80,7 +83,12 @@ const Cart = ({ setOpenCart }) => {
                   className={`h-[45px] flex items-center justify-center w-[100%] bg-[#e44343] rounded-[5px]`}
                 >
                   <h1 className="text-[#fff] text-[18px] font-[600]">
-                    Checkout Now (USD${totalPrice})
+                    Checkout Now (USD${" "}
+                    {totalPrice
+                      .toFixed(2)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    )
                   </h1>
                 </div>
               </Link>
@@ -141,13 +149,17 @@ const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
             ${data.discountPrice} * {value}
           </h4>
           <h4 className="font-[600] text-[17px] pt-[3px] text-[#d02222] font-Roboto">
-            US${totalPrice}
+            US$ {totalPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           </h4>
         </div>
-        <RxCross1
-          className="cursor-pointer"
-          onClick={() => removeFromCartHandler(data)}
-        />
+        <div className="w-[30px]  pl-2">
+          <BiTrash
+            size={25}
+            color="red"
+            className=" cursor-pointer"
+            onClick={() => removeFromCartHandler(data)}
+          />
+        </div>
       </div>
     </div>
   );

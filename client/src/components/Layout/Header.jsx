@@ -177,7 +177,7 @@ const Header = ({ activeHeading }) => {
                   <Link to="/profile">
                     <img
                       src={`${user?.avatar}`}
-                      className="w-[35px] h-[35px] rounded-full"
+                      className="w-[45px] h-[45px] object-fill rounded-full"
                       alt=""
                     />
                   </Link>
@@ -317,7 +317,7 @@ const Header = ({ activeHeading }) => {
                       <img
                         src={`${user.avatar}`}
                         alt=""
-                        className="w-[60px] h-[60px] rounded-full border-[3px] border-[#0eae88]"
+                        className="w-[35px] h-[35px]  object-fill rounded-full border-[3px] border-[#0eae88]"
                       />
                     </Link>
                   </div>

@@ -119,11 +119,11 @@ const ProductDetails = ({ data }) => {
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%]">
                 <img
-                  src={`${data && data.images[select]}`}
+                  src={`${data && data.images[select]} `}
                   alt=""
-                  className="w-[80%]"
+                  className="w-[80%] pb-5"
                 />
-                <div className="w-full flex">
+                <div className="w-full flex  pr-5">
                   {data &&
                     data.images.map((i, index) => (
                       <div
@@ -134,7 +134,7 @@ const ProductDetails = ({ data }) => {
                         <img
                           src={`${i}`}
                           alt=""
-                          className="h-[200px] overflow-hidden mr-3 mt-3"
+                          className="w-[200px] h-auto overflow-hidden "
                           onClick={() => setSelect(index)}
                         />
                       </div>
