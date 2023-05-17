@@ -8,7 +8,7 @@ const path = require("path");
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "https://vs-marketplace.onrender.com"],
     credentials: true,
   })
 );
