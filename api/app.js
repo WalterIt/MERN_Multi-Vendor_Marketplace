@@ -8,7 +8,11 @@ const path = require("path");
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://vs-marketplace.onrender.com"],
+    origin: [
+      "http://localhost:3000",
+      "https://vs-marketplace.onrender.com",
+      "https://vs-marketplace.vercel.app",
+    ],
     credentials: true,
   })
 );
