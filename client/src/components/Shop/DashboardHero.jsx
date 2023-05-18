@@ -15,21 +15,23 @@ const DashboardHero = () => {
   const { seller } = useSelector((state) => state.seller);
   const { products } = useSelector((state) => state.products);
 
+  const availableBalance = seller?.availableBalance
+    .toFixed(2)
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
   useEffect(() => {
     dispatch(getAllOrdersOfShop(seller._id));
     dispatch(getAllProductsShop(seller._id));
   }, [dispatch]);
 
-  const availableBalance = seller?.availableBalance.toFixed(2);
-
   const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
+    { field: "id", headerName: "Order ID", minWidth: 220, flex: 0.8 },
 
     {
       field: "status",
       headerName: "Status",
-      minWidth: 130,
-      flex: 0.7,
+      minWidth: 220,
+      flex: 0.8,
       cellClassName: (params) => {
         return params.getValue(params.id, "status") === "Delivered"
           ? "greenColor"
@@ -40,15 +42,15 @@ const DashboardHero = () => {
       field: "itemsQty",
       headerName: "Items Qty",
       type: "number",
-      minWidth: 130,
-      flex: 0.7,
+      minWidth: 100,
+      flex: 0.5,
     },
 
     {
       field: "total",
       headerName: "Total",
       type: "number",
-      minWidth: 130,
+      minWidth: 150,
       flex: 0.8,
     },
 

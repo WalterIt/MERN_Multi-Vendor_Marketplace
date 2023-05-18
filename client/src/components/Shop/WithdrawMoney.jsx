@@ -10,9 +10,9 @@ import { loadSeller } from "../../redux/actions/user";
 import { AiOutlineDelete } from "react-icons/ai";
 
 const WithdrawMoney = () => {
+  const { seller } = useSelector((state) => state.seller);
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-  const { seller } = useSelector((state) => state.seller);
   const [paymentMethod, setPaymentMethod] = useState(false);
   const [withdrawAmount, setWithdrawAmount] = useState(50);
   const [bankInfo, setBankInfo] = useState({
@@ -23,6 +23,10 @@ const WithdrawMoney = () => {
     bankHolderName: "",
     bankAddress: "",
   });
+
+  const availableBalance = seller?.availableBalance
+    .toFixed(2)
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
   useEffect(() => {
     dispatch(getAllOrdersOfShop(seller._id));
@@ -61,6 +65,7 @@ const WithdrawMoney = () => {
           bankHolderName: "",
           bankAddress: "",
         });
+        setOpen(false);
       })
       .catch((error) => {
         console.log(error.response.data.message);
@@ -98,8 +103,6 @@ const WithdrawMoney = () => {
         });
     }
   };
-
-  const availableBalance = seller?.availableBalance.toFixed(2);
 
   return (
     <div className="w-full h-[90vh] p-8">

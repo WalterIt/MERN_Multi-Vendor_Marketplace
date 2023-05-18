@@ -12,7 +12,7 @@ const AllWithdraw = () => {
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
   const [withdrawData, setWithdrawData] = useState();
-  const [withdrawStatus,setWithdrawStatus] = useState('Processing');
+  const [withdrawStatus, setWithdrawStatus] = useState("Processing");
 
   useEffect(() => {
     axios
@@ -21,6 +21,8 @@ const AllWithdraw = () => {
       })
       .then((res) => {
         setData(res.data.withdraws);
+        setOpen(false);
+        toast.success("Withdraw request added successfully!");
       })
       .catch((error) => {
         console.log(error.response.data.message);
@@ -28,7 +30,7 @@ const AllWithdraw = () => {
   }, []);
 
   const columns = [
-    { field: "id", headerName: "Withdraw Id", minWidth: 150, flex: 0.7 },
+    { field: "id", headerName: "Withdraw Id", minWidth: 220, flex: 0.8 },
     {
       field: "name",
       headerName: "Shop Name",
@@ -38,20 +40,20 @@ const AllWithdraw = () => {
     {
       field: "shopId",
       headerName: "Shop Id",
-      minWidth: 180,
-      flex: 1.4,
+      minWidth: 150,
+      flex: 1,
     },
     {
       field: "amount",
       headerName: "Amount",
-      minWidth: 100,
+      minWidth: 130,
       flex: 0.6,
     },
     {
       field: "status",
       headerName: "status",
       type: "text",
-      minWidth: 80,
+      minWidth: 120,
       flex: 0.5,
     },
     {
@@ -66,13 +68,15 @@ const AllWithdraw = () => {
       headerName: "Update Status",
       type: "number",
       minWidth: 130,
-      flex: 0.6,
+      flex: 0.7,
       renderCell: (params) => {
-
         return (
           <BsPencil
             size={20}
-            className={`${params.row.status !== "Processing" ? 'hidden' : '' } mr-5 cursor-pointer`}
+            color="#3f51b5"
+            className={`${
+              params.row.status !== "Processing" ? "hidden" : ""
+            } mr-5 cursor-pointer`}
             onClick={() => setOpen(true) || setWithdrawData(params.row)}
           />
         );
@@ -82,9 +86,13 @@ const AllWithdraw = () => {
 
   const handleSubmit = async () => {
     await axios
-      .put(`${server}/withdraw/update-withdraw-request/${withdrawData.id}`,{
-        sellerId: withdrawData.shopId,
-      },{withCredentials: true})
+      .put(
+        `${server}/withdraw/update-withdraw-request/${withdrawData.id}`,
+        {
+          sellerId: withdrawData.shopId,
+        },
+        { withCredentials: true }
+      )
       .then((res) => {
         toast.success("Withdraw request updated successfully!");
         setData(res.data.withdraws);
@@ -100,11 +108,13 @@ const AllWithdraw = () => {
         id: item._id,
         shopId: item.seller._id,
         name: item.seller.name,
-        amount: "US$ " + item.amount,
+        amount:
+          "US$ " + item.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","),
         status: item.status,
         createdAt: item.createdAt.slice(0, 10),
       });
     });
+
   return (
     <div className="w-full flex items-center pt-5 justify-center">
       <div className="w-[95%] bg-white">
@@ -116,6 +126,7 @@ const AllWithdraw = () => {
           autoHeight
         />
       </div>
+
       {open && (
         <div className="w-full fixed h-screen top-0 left-0 bg-[#00000031] z-[9999] flex items-center justify-center">
           <div className="w-[50%] min-h-[40vh] bg-white rounded shadow p-4">
@@ -123,7 +134,7 @@ const AllWithdraw = () => {
               <RxCross1 size={25} onClick={() => setOpen(false)} />
             </div>
             <h1 className="text-[25px] text-center font-Poppins">
-              Update Withdraw status
+              Update Withdraw Status
             </h1>
             <br />
             <select

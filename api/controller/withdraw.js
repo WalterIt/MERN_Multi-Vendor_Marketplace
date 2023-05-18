@@ -24,7 +24,7 @@ router.post(
         await sendMail({
           email: req.seller.email,
           subject: "Withdraw Request",
-          message: `Hello ${req.seller.name}, Your withdraw request of ${amount}$ is processing. It will take 3days to 7days to processing! `,
+          message: `Hello ${req.seller.name}, Your withdraw request of ${amount}$ is processing. It will take 3 days to 7 days to processing! `,
         });
         res.status(201).json({
           success: true,
@@ -51,7 +51,7 @@ router.post(
   })
 );
 
-// get all withdraws --- admnin
+// get all withdraws --- admin
 
 router.get(
   "/get-all-withdraw-request",
@@ -83,7 +83,7 @@ router.put(
       const withdraw = await Withdraw.findByIdAndUpdate(
         req.params.id,
         {
-          status: "succeed",
+          status: "Succeed",
           updatedAt: Date.now(),
         },
         { new: true }
@@ -91,14 +91,14 @@ router.put(
 
       const seller = await Shop.findById(sellerId);
 
-      const transection = {
+      const transaction = {
         _id: withdraw._id,
         amount: withdraw.amount,
         updatedAt: withdraw.updatedAt,
         status: withdraw.status,
       };
 
-      seller.transections = [...seller.transections, transection];
+      seller.transactions = [...seller.transactions, transaction];
 
       await seller.save();
 
@@ -106,7 +106,7 @@ router.put(
         await sendMail({
           email: seller.email,
           subject: "Payment confirmation",
-          message: `Hello ${seller.name}, Your withdraw request of ${withdraw.amount}$ is on the way. Delivery time depends on your bank's rules it usually takes 3days to 7days.`,
+          message: `Hello ${seller.name}, Your withdraw request of ${withdraw.amount}$ is on the way. Delivery time depends on your bank's rules it usually takes 3 days to 7 days.`,
         });
       } catch (error) {
         return next(new ErrorHandler(error.message, 500));
